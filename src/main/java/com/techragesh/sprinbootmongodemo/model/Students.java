@@ -24,5 +24,4 @@ public class Students {
     @Field(value = "college")
     private String college;
 
-
 }
