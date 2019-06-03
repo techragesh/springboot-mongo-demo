@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.techragesh</groupId>
-    <artifactId>sprinboot-mongo-demo</artifactId>
+    <artifactId>sprinboot-jwt-mongo-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -34,11 +34,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.4</version>
+            <version>1.18.8</version>
             <scope>provided</scope>
         </dependency>
 
@@ -80,6 +84,19 @@
             <artifactId>joda-time</artifactId>
         </dependency>
 
+        <!-- JWT dependencies -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -88,6 +105,31 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <!-- json2pojo -->
+            <plugin>
+                <groupId>org.jsonschema2pojo</groupId>
+                <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+                <version>0.5.1</version>
+                <executions>
+                    <execution>
+                        <id>model</id>
+                        <configuration>
+                            <sourceDirectory>${basedir}/src/main/resources/json</sourceDirectory>
+                            <useLongIntegers>true</useLongIntegers>
+                            <sourceType>json</sourceType>
+                            <targetPackage>com.techragesh.springbootmongodemo.model.generated</targetPackage>
+                            <includeAdditionalProperties>false</includeAdditionalProperties>
+                            <outputDirectory>${project.build.directory}/generated-sources/jsonschema2pojo
+                            </outputDirectory>
+                        </configuration>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
